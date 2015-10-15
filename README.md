@@ -15,3 +15,4 @@ Your components can be optionally provided a `list` and/or an `item`.  Simply sp
 - For assigning the provider to components and initializing state, see [`todomvc/index.js`](https://github.com/loggur/react-redux-provide/blob/master/examples/todomvc/index.js#L6).
 - For creating items, see [`todomvc/components/Header.js`](https://github.com/loggur/react-redux-provide/blob/master/examples/todomvc/components/Header.js).
 - For updating items, see [`todomvc/components/TodoItem.js`](https://github.com/loggur/react-redux-provide/blob/master/examples/todomvc/components/TodoItem.js).
+- For displaying and manipulating an entire list, see [`todomvc/components/MainSection.js`](https://github.com/loggur/react-redux-provide/blob/master/examples/todomvc/components/MainSection.js).
