@@ -1,0 +1,33 @@
+{
+  "name": "react-redux-provide-list",
+  "version": "0.1.0",
+  "description": "Provides a handful of common actions and props specific to lists and items.",
+  "main": "./lib/list.js",
+  "scripts": {
+    "build": "babel src --out-dir lib --stage 0",
+    "clean": "rimraf lib",
+    "prepublish": "npm run clean && npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/loggur/react-redux-provide-list.git"
+  },
+  "keywords": [
+    "react",
+    "redux",
+    "provide",
+    "list",
+    "items"
+  ],
+  "author": "timbur",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/loggur/react-redux-provide-list/issues"
+  },
+  "homepage": "https://github.com/loggur/react-redux-provide-list#readme",
+  "devDependencies": {
+    "babel": "^5.8.23",
+    "rimraf": "^2.4.3"
+  }
+}
