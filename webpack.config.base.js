@@ -2,24 +2,32 @@
 
 var webpack = require('webpack');
 
-var reactExternal = {
-  root: 'React',
-  commonjs2: 'react',
-  commonjs: 'react',
-  amd: 'react'
-};
-
-var reduxExternal = {
-  root: 'Redux',
-  commonjs2: 'redux',
-  commonjs: 'redux',
-  amd: 'redux'
-};
-
 module.exports = {
   externals: {
-    'react': reactExternal,
-    'redux': reduxExternal
+    'react': {
+      root: 'React',
+      commonjs2: 'react',
+      commonjs: 'react',
+      amd: 'react'
+    },
+    'redux': {
+      root: 'Redux',
+      commonjs2: 'redux',
+      commonjs: 'redux',
+      amd: 'redux'
+    },
+    'react-redux': {
+      root: 'ReactRedux',
+      commonjs2: 'react-redux',
+      commonjs: 'react-redux',
+      amd: 'react-redux'
+    },
+    'react-redux-provide': {
+      root: 'ReactReduxProvide',
+      commonjs2: 'react-redux-provide',
+      commonjs: 'react-redux-provide',
+      amd: 'react-redux-provide'
+    }
   },
   module: {
     loaders: [
@@ -27,7 +35,7 @@ module.exports = {
     ]
   },
   output: {
-    library: 'ReactRedux',
+    library: 'ReactReduxProvideList',
     libraryTarget: 'umd'
   },
   resolve: {
