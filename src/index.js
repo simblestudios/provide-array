@@ -1,5 +1,5 @@
 const SET_LIST = 'SET_LIST';
-const MAP_LIST = 'MAP_LIST';
+const UPDATE_LIST = 'UPDATE_LIST';
 const FILTER_LIST = 'FILTER_LIST';
 const CREATE_ITEM = 'CREATE_ITEM';
 const UPDATE_ITEM = 'UPDATE_ITEM';
@@ -10,8 +10,8 @@ export const actions = {
     return { type: SET_LIST, list };
   },
 
-  mapList(map) {
-    return { type: MAP_LIST, map };
+  updateList(update) {
+    return { type: UPDATE_LIST, update };
   },
 
   filterList(filter) {
@@ -50,8 +50,8 @@ export const reducers = {
       case SET_LIST:
         return action.list;
 
-      case MAP_LIST:
-        return state.map(action.map);
+      case UPDATE_LIST:
+        return state.map(action.update);
 
       case FILTER_LIST:
         return state.filter(action.filter);
@@ -83,6 +83,6 @@ export const reducers = {
 
 export function merge (stateProps, dispatchProps, parentProps) {
   return Object.assign({}, parentProps, {
-    item: stateProps.list[parentProps.index]
+    item: stateProps.list[parentProps.index] || null
   });
 }

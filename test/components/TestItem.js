@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import provide from 'react-redux-provide';
 
 @provide({
-  item: PropTypes.object.isRequired,
+  item: PropTypes.object,
   updateItem: PropTypes.func.isRequired,
   deleteItem: PropTypes.func.isRequired
 })
@@ -12,9 +12,11 @@ export default class TestItem extends Component {
   };
 
   render() {
-    return (
+    const { item } = this.props;
+
+    return item && (
       <li className="test-item">
-        {this.props.item.value}
+        {item.value}
       </li>
     );
   }

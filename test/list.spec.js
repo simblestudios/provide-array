@@ -33,8 +33,8 @@ describe('react-redux-provide-list', () => {
     expect(testItem.wrappedInstance.props.item.value).toBe('a');
   });
 
-  it('should mapList', () => {
-    test.wrappedInstance.props.mapList((item) => {
+  it('should updateList', () => {
+    test.wrappedInstance.props.updateList((item) => {
       return { ...item, value: item.value+item.value };
     });
 

@@ -5,7 +5,7 @@ import TestItem from './TestItem';
 @provide({
   list: PropTypes.arrayOf(PropTypes.object).isRequired,
   setList: PropTypes.func.isRequired,
-  mapList: PropTypes.func.isRequired,
+  updateList: PropTypes.func.isRequired,
   filterList: PropTypes.func.isRequired,
   createItem: PropTypes.func.isRequired
 })
