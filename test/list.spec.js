@@ -10,90 +10,302 @@ const testItem = renderTest(TestItem, { index: 0 });
 
 describe('react-redux-provide-list', () => {
   it('should have initialized list', () => {
-    expect(test.wrappedInstance.props.list.length).toBe(1);
-    expect(test.wrappedInstance.props.list[0].value).toBe('test');
+    expect(test.wrappedInstance.props.testList instanceof Array).toBe(true);
+    expect(typeof test.wrappedInstance.props.testList[0]).toBe('object');
+    expect(test.wrappedInstance.props.testList.length).toBe(3);
+    expect(test.wrappedInstance.props.testListLength).toBe(3);
+    expect(test.wrappedInstance.props.testList[0].selected).toBe(true);
+    expect(test.wrappedInstance.props.testList[0].value).toBe('a');
+    expect(typeof test.wrappedInstance.props.testList[1]).toBe('object');
+    expect(test.wrappedInstance.props.testList[1].value).toBe('b');
+    expect(typeof test.wrappedInstance.props.testList[2]).toBe('object');
+    expect(test.wrappedInstance.props.testList[2].value).toBe('c');
   });
 
   it('should provide item when index prop is present', () => {
-    expect(testItem.wrappedInstance.props.item.value).toBe('test');
+    expect(testItem.wrappedInstance.props.index).toBe(0);
+    expect(testItem.wrappedInstance.props.testItem.selected).toBe(true);
+    expect(testItem.wrappedInstance.props.testItem.value).toBe('a');
   });
 
   it('should setList', () => {
-    test.wrappedInstance.props.setList([
-      {value: 'a'},
-      {value: 'b'},
-      {value: 'c'}
+    test.wrappedInstance.props.setTestList([
+      {value: 'apple'},
+      {value: 'banana'},
+      {value: 'carrot'}
     ]);
 
-    expect(test.wrappedInstance.props.list.length).toBe(3);
-    expect(test.wrappedInstance.props.list[0].value).toBe('a');
-    expect(test.wrappedInstance.props.list[1].value).toBe('b');
-    expect(test.wrappedInstance.props.list[2].value).toBe('c');
+    expect(test.wrappedInstance.props.testList instanceof Array).toBe(true);
+    expect(test.wrappedInstance.props.testList.length).toBe(3);
+    expect(test.wrappedInstance.props.testListLength).toBe(3);
+    expect(typeof test.wrappedInstance.props.testList[0]).toBe('object');
+    expect(test.wrappedInstance.props.testList[0].value).toBe('apple');
+    expect(typeof test.wrappedInstance.props.testList[1]).toBe('object');
+    expect(test.wrappedInstance.props.testList[1].value).toBe('banana');
+    expect(typeof test.wrappedInstance.props.testList[2]).toBe('object');
+    expect(test.wrappedInstance.props.testList[2].value).toBe('carrot');
 
-    expect(testItem.wrappedInstance.props.item.value).toBe('a');
+    expect(testItem.wrappedInstance.props.index).toBe(0);
+    expect(testItem.wrappedInstance.props.testItem.selected).toBe(undefined);
+    expect(testItem.wrappedInstance.props.testItem.value).toBe('apple');
+  });
+
+  it('should sortList', () => {
+    test.wrappedInstance.props.sortTestList((a, b) => {
+      if (a.value > b.value) {
+        return -1;
+      } else if (a.value < b.value) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
+
+    expect(test.wrappedInstance.props.testList instanceof Array).toBe(true);
+    expect(test.wrappedInstance.props.testList.length).toBe(3);
+    expect(test.wrappedInstance.props.testListLength).toBe(3);
+    expect(typeof test.wrappedInstance.props.testList[0]).toBe('object');
+    expect(test.wrappedInstance.props.testList[0].value).toBe('carrot');
+    expect(typeof test.wrappedInstance.props.testList[1]).toBe('object');
+    expect(test.wrappedInstance.props.testList[1].value).toBe('banana');
+    expect(typeof test.wrappedInstance.props.testList[2]).toBe('object');
+    expect(test.wrappedInstance.props.testList[2].value).toBe('apple');
+
+    expect(testItem.wrappedInstance.props.index).toBe(0);
+    expect(testItem.wrappedInstance.props.testItem.selected).toBe(undefined);
+    expect(testItem.wrappedInstance.props.testItem.value).toBe('carrot');
+  });
+
+  it('should reverseList', () => {
+    test.wrappedInstance.props.reverseTestList();
+
+    expect(test.wrappedInstance.props.testList instanceof Array).toBe(true);
+    expect(test.wrappedInstance.props.testList.length).toBe(3);
+    expect(test.wrappedInstance.props.testListLength).toBe(3);
+    expect(typeof test.wrappedInstance.props.testList[0]).toBe('object');
+    expect(test.wrappedInstance.props.testList[0].value).toBe('apple');
+    expect(typeof test.wrappedInstance.props.testList[1]).toBe('object');
+    expect(test.wrappedInstance.props.testList[1].value).toBe('banana');
+    expect(typeof test.wrappedInstance.props.testList[2]).toBe('object');
+    expect(test.wrappedInstance.props.testList[2].value).toBe('carrot');
+
+    expect(testItem.wrappedInstance.props.index).toBe(0);
+    expect(testItem.wrappedInstance.props.testItem.selected).toBe(undefined);
+    expect(testItem.wrappedInstance.props.testItem.value).toBe('apple');
   });
 
   it('should updateList', () => {
-    test.wrappedInstance.props.updateList((item) => {
-      return { ...item, value: item.value+item.value };
-    });
+    test.wrappedInstance.props.updateTestList((testItem, index) => (
+      { ...testItem, value: testItem.value.slice(0, 3) }
+    ));
 
-    expect(test.wrappedInstance.props.list.length).toBe(3);
-    expect(test.wrappedInstance.props.list[0].value).toBe('aa');
-    expect(test.wrappedInstance.props.list[1].value).toBe('bb');
-    expect(test.wrappedInstance.props.list[2].value).toBe('cc');
+    expect(test.wrappedInstance.props.testList instanceof Array).toBe(true);
+    expect(test.wrappedInstance.props.testList.length).toBe(3);
+    expect(test.wrappedInstance.props.testListLength).toBe(3);
+    expect(typeof test.wrappedInstance.props.testList[0]).toBe('object');
+    expect(test.wrappedInstance.props.testList[0].value).toBe('app');
+    expect(typeof test.wrappedInstance.props.testList[1]).toBe('object');
+    expect(test.wrappedInstance.props.testList[1].value).toBe('ban');
+    expect(typeof test.wrappedInstance.props.testList[2]).toBe('object');
+    expect(test.wrappedInstance.props.testList[2].value).toBe('car');
 
-    expect(testItem.wrappedInstance.props.item.value).toBe('aa');
+    expect(testItem.wrappedInstance.props.index).toBe(0);
+    expect(testItem.wrappedInstance.props.testItem.selected).toBe(undefined);
+    expect(testItem.wrappedInstance.props.testItem.value).toBe('app');
   });
 
   it('should filterList', () => {
-    test.wrappedInstance.props.filterList((item, index) => {
-      return item.value !== 'aa' && index !== 1;
-    });
+    test.wrappedInstance.props.filterTestList((testItem, index) => (
+      testItem.value !== 'ban' && index !== 2
+    ));
 
-    expect(test.wrappedInstance.props.list.length).toBe(1);
-    expect(test.wrappedInstance.props.list[0].value).toBe('cc');
+    expect(test.wrappedInstance.props.testList instanceof Array).toBe(true);
+    expect(test.wrappedInstance.props.testList.length).toBe(1);
+    expect(test.wrappedInstance.props.testListLength).toBe(1);
+    expect(typeof test.wrappedInstance.props.testList[0]).toBe('object');
+    expect(test.wrappedInstance.props.testList[0].value).toBe('app');
+    expect(test.wrappedInstance.props.testList[1]).toBe(undefined);
+    expect(test.wrappedInstance.props.testList[2]).toBe(undefined);
 
-    expect(testItem.wrappedInstance.props.item.value).toBe('cc');
+    expect(testItem.wrappedInstance.props.index).toBe(0);
+    expect(testItem.wrappedInstance.props.testItem.selected).toBe(undefined);
+    expect(testItem.wrappedInstance.props.testItem.value).toBe('app');
   });
 
-  it('should createItem', () => {
-    test.wrappedInstance.props.createItem({
-      value: 'dd'
+  it('should unshiftItem', () => {
+    test.wrappedInstance.props.unshiftTestItem({
+      value: 'donut'
     });
 
-    expect(test.wrappedInstance.props.list.length).toBe(2);
-    expect(test.wrappedInstance.props.list[0].value).toBe('dd');
-    expect(test.wrappedInstance.props.list[1].value).toBe('cc');
+    expect(test.wrappedInstance.props.testList instanceof Array).toBe(true);
+    expect(test.wrappedInstance.props.testList.length).toBe(2);
+    expect(test.wrappedInstance.props.testListLength).toBe(2);
+    expect(typeof test.wrappedInstance.props.testList[0]).toBe('object');
+    expect(test.wrappedInstance.props.testList[0].value).toBe('donut');
+    expect(typeof test.wrappedInstance.props.testList[1]).toBe('object');
+    expect(test.wrappedInstance.props.testList[1].value).toBe('app');
 
-    expect(testItem.wrappedInstance.props.item.value).toBe('dd');
+    expect(testItem.wrappedInstance.props.index).toBe(0);
+    expect(testItem.wrappedInstance.props.testItem.selected).toBe(undefined);
+    expect(testItem.wrappedInstance.props.testItem.value).toBe('donut');
+  });
+
+  it('should shiftList', () => {
+    test.wrappedInstance.props.shiftTestList();
+
+    expect(test.wrappedInstance.props.testList instanceof Array).toBe(true);
+    expect(test.wrappedInstance.props.testList.length).toBe(1);
+    expect(test.wrappedInstance.props.testListLength).toBe(1);
+    expect(typeof test.wrappedInstance.props.testList[0]).toBe('object');
+    expect(test.wrappedInstance.props.testList[0].value).toBe('app');
+    expect(test.wrappedInstance.props.testList[1]).toBe(undefined);
+    expect(test.wrappedInstance.props.testList[2]).toBe(undefined);
+
+    expect(testItem.wrappedInstance.props.index).toBe(0);
+    expect(testItem.wrappedInstance.props.testItem.selected).toBe(undefined);
+    expect(testItem.wrappedInstance.props.testItem.value).toBe('app');
+  });
+
+  it('should pushItem', () => {
+    test.wrappedInstance.props.pushTestItem({
+      value: 'donut'
+    });
+
+    expect(test.wrappedInstance.props.testList instanceof Array).toBe(true);
+    expect(test.wrappedInstance.props.testList.length).toBe(2);
+    expect(test.wrappedInstance.props.testListLength).toBe(2);
+    expect(typeof test.wrappedInstance.props.testList[0]).toBe('object');
+    expect(test.wrappedInstance.props.testList[0].value).toBe('app');
+    expect(typeof test.wrappedInstance.props.testList[1]).toBe('object');
+    expect(test.wrappedInstance.props.testList[1].value).toBe('donut');
+
+    expect(testItem.wrappedInstance.props.index).toBe(0);
+    expect(testItem.wrappedInstance.props.testItem.selected).toBe(undefined);
+    expect(testItem.wrappedInstance.props.testItem.value).toBe('app');
+  });
+
+  it('should popList', () => {
+    test.wrappedInstance.props.popTestList();
+
+    expect(test.wrappedInstance.props.testList instanceof Array).toBe(true);
+    expect(test.wrappedInstance.props.testList.length).toBe(1);
+    expect(test.wrappedInstance.props.testListLength).toBe(1);
+    expect(typeof test.wrappedInstance.props.testList[0]).toBe('object');
+    expect(test.wrappedInstance.props.testList[0].value).toBe('app');
+    expect(test.wrappedInstance.props.testList[1]).toBe(undefined);
+    expect(test.wrappedInstance.props.testList[2]).toBe(undefined);
+
+    expect(testItem.wrappedInstance.props.index).toBe(0);
+    expect(testItem.wrappedInstance.props.testItem.selected).toBe(undefined);
+    expect(testItem.wrappedInstance.props.testItem.value).toBe('app');
+  });
+
+  it('should setItem', () => {
+    test.wrappedInstance.props.setTestItem(1, {
+      value: 'donut'
+    });
+
+    expect(test.wrappedInstance.props.testList instanceof Array).toBe(true);
+    expect(test.wrappedInstance.props.testList.length).toBe(2);
+    expect(test.wrappedInstance.props.testListLength).toBe(2);
+    expect(typeof test.wrappedInstance.props.testList[0]).toBe('object');
+    expect(test.wrappedInstance.props.testList[0].value).toBe('app');
+    expect(typeof test.wrappedInstance.props.testList[1]).toBe('object');
+    expect(test.wrappedInstance.props.testList[1].value).toBe('donut');
+
+    expect(testItem.wrappedInstance.props.index).toBe(0);
+    expect(testItem.wrappedInstance.props.testItem.selected).toBe(undefined);
+    expect(testItem.wrappedInstance.props.testItem.value).toBe('app');
   });
 
   it('should updateItem', () => {
-    testItem.wrappedInstance.props.updateItem(
+    testItem.wrappedInstance.props.updateTestItem(
       testItem.wrappedInstance.props.index, {
-        value: 'ee',
+        selected: true,
         updated: true
       }
     );
 
-    expect(test.wrappedInstance.props.list.length).toBe(2);
-    expect(test.wrappedInstance.props.list[0].value).toBe('ee');
-    expect(test.wrappedInstance.props.list[0].updated).toBe(true);
-    expect(test.wrappedInstance.props.list[1].value).toBe('cc');
+    expect(test.wrappedInstance.props.testList instanceof Array).toBe(true);
+    expect(test.wrappedInstance.props.testList.length).toBe(2);
+    expect(test.wrappedInstance.props.testListLength).toBe(2);
+    expect(typeof test.wrappedInstance.props.testList[0]).toBe('object');
+    expect(test.wrappedInstance.props.testList[0].value).toBe('app');
+    expect(typeof test.wrappedInstance.props.testList[1]).toBe('object');
+    expect(test.wrappedInstance.props.testList[1].value).toBe('donut');
 
-    expect(testItem.wrappedInstance.props.item.value).toBe('ee');
+    expect(testItem.wrappedInstance.props.index).toBe(0);
+    expect(testItem.wrappedInstance.props.testItem.selected).toBe(true);
+    expect(testItem.wrappedInstance.props.testItem.value).toBe('app');
+    expect(testItem.wrappedInstance.props.testItem.updated).toBe(true);
   });
 
   it('should deleteItem', () => {
-    testItem.wrappedInstance.props.deleteItem(
+    testItem.wrappedInstance.props.deleteTestItem(
       testItem.wrappedInstance.props.index
     );
 
-    expect(test.wrappedInstance.props.list.length).toBe(1);
-    expect(test.wrappedInstance.props.list[0].value).toBe('cc');
-    expect(test.wrappedInstance.props.list[0].updated).toBe(undefined);
+    expect(test.wrappedInstance.props.testList instanceof Array).toBe(true);
+    expect(test.wrappedInstance.props.testList.length).toBe(1);
+    expect(test.wrappedInstance.props.testListLength).toBe(1);
+    expect(typeof test.wrappedInstance.props.testList[0]).toBe('object');
+    expect(test.wrappedInstance.props.testList[0].value).toBe('donut');
+    expect(test.wrappedInstance.props.testList[1]).toBe(undefined);
 
-    expect(testItem.wrappedInstance.props.item.value).toBe('cc');
+    expect(testItem.wrappedInstance.props.index).toBe(0);
+    expect(testItem.wrappedInstance.props.testItem.selected).toBe(undefined);
+    expect(testItem.wrappedInstance.props.testItem.value).toBe('donut');
+    expect(testItem.wrappedInstance.props.testItem.updated).toBe(undefined);
+  });
+
+  it('should spliceList', () => {
+    const banana = { value: 'banana' };
+    const carrot = { value: 'carrot' };
+
+    test.wrappedInstance.props.spliceTestList(1, 0, banana, carrot);
+
+    expect(test.wrappedInstance.props.testList instanceof Array).toBe(true);
+    expect(test.wrappedInstance.props.testList.length).toBe(3);
+    expect(test.wrappedInstance.props.testListLength).toBe(3);
+    expect(typeof test.wrappedInstance.props.testList[0]).toBe('object');
+    expect(test.wrappedInstance.props.testList[0].value).toBe('donut');
+    expect(typeof test.wrappedInstance.props.testList[1]).toBe('object');
+    expect(test.wrappedInstance.props.testList[1].value).toBe('banana');
+    expect(typeof test.wrappedInstance.props.testList[2]).toBe('object');
+    expect(test.wrappedInstance.props.testList[2].value).toBe('carrot');
+
+    expect(testItem.wrappedInstance.props.index).toBe(0);
+    expect(testItem.wrappedInstance.props.testItem.selected).toBe(undefined);
+    expect(testItem.wrappedInstance.props.testItem.value).toBe('donut');
+    expect(testItem.wrappedInstance.props.testItem.updated).toBe(undefined);
+  });
+
+  it('should sliceList', () => {
+    test.wrappedInstance.props.sliceTestList(1, 3);
+
+    expect(test.wrappedInstance.props.testList instanceof Array).toBe(true);
+    expect(test.wrappedInstance.props.testList.length).toBe(2);
+    expect(test.wrappedInstance.props.testListLength).toBe(2);
+    expect(typeof test.wrappedInstance.props.testList[0]).toBe('object');
+    expect(test.wrappedInstance.props.testList[0].value).toBe('banana');
+    expect(typeof test.wrappedInstance.props.testList[1]).toBe('object');
+    expect(test.wrappedInstance.props.testList[1].value).toBe('carrot');
+
+    expect(testItem.wrappedInstance.props.index).toBe(0);
+    expect(testItem.wrappedInstance.props.testItem.selected).toBe(undefined);
+    expect(testItem.wrappedInstance.props.testItem.value).toBe('banana');
+    expect(testItem.wrappedInstance.props.testItem.updated).toBe(undefined);
+  });
+
+  it('should clearList', () => {
+    test.wrappedInstance.props.clearTestList();
+
+    expect(test.wrappedInstance.props.testList instanceof Array).toBe(true);
+    expect(test.wrappedInstance.props.testList.length).toBe(0);
+    expect(test.wrappedInstance.props.testListLength).toBe(0);
+    expect(test.wrappedInstance.props.testList[0]).toBe(undefined);
+
+    expect(testItem.wrappedInstance.props.index).toBe(0);
+    expect(testItem.wrappedInstance.props.testItem).toBe(undefined);
   });
 });

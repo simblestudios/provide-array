@@ -1,19 +1,26 @@
 import { assignProviders } from 'react-redux-provide';
-import * as list from '../src/index';
+import provideList from '../src/index';
 import Test from './components/Test';
 import TestItem from './components/TestItem';
 
-const states = {
-  values: {
-    list: [
-      {
-        value: 'test'
-      }
-    ]
-  }
+const testList = provideList('testList', 'testItem');
+
+const initialState = {
+  testList: [
+    {
+      selected: true,
+      value: 'a'
+    },
+    {
+      value: 'b'
+    },
+    {
+      value: 'c'
+    }
+  ]
 };
 
-assignProviders(states.values, { list }, {
+assignProviders(initialState, { testList }, {
   Test,
   TestItem
 });
