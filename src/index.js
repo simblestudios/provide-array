@@ -22,6 +22,24 @@ export default function provideList (
   const UPDATE_ITEM = `UPDATE_${capitalItemName}`;
   const DELETE_ITEM = `DELETE_${capitalItemName}`;
 
+  const constants = {
+    [SET_LIST]: SET_LIST,
+    [SORT_LIST]: SORT_LIST,
+    [REVERSE_LIST]: REVERSE_LIST,
+    [UPDATE_LIST]: UPDATE_LIST,
+    [FILTER_LIST]: FILTER_LIST,
+    [SHIFT_LIST]: SHIFT_LIST,
+    [POP_LIST]: POP_LIST,
+    [SLICE_LIST]: SLICE_LIST,
+    [SPLICE_LIST]: SPLICE_LIST,
+    [CLEAR_LIST]: CLEAR_LIST,
+    [UNSHIFT_ITEM]: UNSHIFT_ITEM,
+    [PUSH_ITEM]: PUSH_ITEM,
+    [SET_ITEM]: SET_ITEM,
+    [UPDATE_ITEM]: UPDATE_ITEM,
+    [DELETE_ITEM]: DELETE_ITEM
+  };
+
   const actions = {
     [`set${properListName}`]: (list) => (
       { type: SET_LIST, [listName]: list }
@@ -183,5 +201,5 @@ export default function provideList (
     };
   }
 
-  return { actions, reducers, merge };
+  return { ...constants, actions, reducers, merge };
 }
