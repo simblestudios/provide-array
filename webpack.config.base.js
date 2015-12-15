@@ -35,7 +35,7 @@ module.exports = {
     ]
   },
   output: {
-    library: 'ReactReduxProvideList',
+    library: 'provideList',
     libraryTarget: 'umd'
   },
   resolve: {
