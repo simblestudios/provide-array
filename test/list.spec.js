@@ -1,12 +1,29 @@
-import './init';
 import expect from 'expect';
 import React, { PropTypes } from 'react';
 import { renderTest } from 'react-redux-provide-test-utils';
-import Test from './components/Test';
-import TestItem from './components/TestItem';
+import { Test, TestItem } from './components/index';
+import providers from './providers/index';
 
-const test = renderTest(Test);
-const testItem = renderTest(TestItem, { index: 0 });
+const context = {
+  providers,
+  providedState: {
+    testList: [
+      {
+        selected: true,
+        value: 'a'
+      },
+      {
+        value: 'b'
+      },
+      {
+        value: 'c'
+      }
+    ]
+  }
+};
+
+const test = renderTest(Test, { ...context });
+const testItem = renderTest(TestItem, { ...context, index: 0 });
 
 describe('react-redux-provide-list', () => {
   it('should have initialized list', () => {
@@ -44,10 +61,6 @@ describe('react-redux-provide-list', () => {
     expect(test.wrappedInstance.props.testList[1].value).toBe('banana');
     expect(typeof test.wrappedInstance.props.testList[2]).toBe('object');
     expect(test.wrappedInstance.props.testList[2].value).toBe('carrot');
-
-    expect(testItem.wrappedInstance.props.index).toBe(0);
-    expect(testItem.wrappedInstance.props.testItem.selected).toBe(undefined);
-    expect(testItem.wrappedInstance.props.testItem.value).toBe('apple');
   });
 
   it('should sortList', () => {
@@ -70,10 +83,6 @@ describe('react-redux-provide-list', () => {
     expect(test.wrappedInstance.props.testList[1].value).toBe('banana');
     expect(typeof test.wrappedInstance.props.testList[2]).toBe('object');
     expect(test.wrappedInstance.props.testList[2].value).toBe('apple');
-
-    expect(testItem.wrappedInstance.props.index).toBe(0);
-    expect(testItem.wrappedInstance.props.testItem.selected).toBe(undefined);
-    expect(testItem.wrappedInstance.props.testItem.value).toBe('carrot');
   });
 
   it('should reverseList', () => {
@@ -88,10 +97,6 @@ describe('react-redux-provide-list', () => {
     expect(test.wrappedInstance.props.testList[1].value).toBe('banana');
     expect(typeof test.wrappedInstance.props.testList[2]).toBe('object');
     expect(test.wrappedInstance.props.testList[2].value).toBe('carrot');
-
-    expect(testItem.wrappedInstance.props.index).toBe(0);
-    expect(testItem.wrappedInstance.props.testItem.selected).toBe(undefined);
-    expect(testItem.wrappedInstance.props.testItem.value).toBe('apple');
   });
 
   it('should updateList', () => {
@@ -108,10 +113,6 @@ describe('react-redux-provide-list', () => {
     expect(test.wrappedInstance.props.testList[1].value).toBe('ban');
     expect(typeof test.wrappedInstance.props.testList[2]).toBe('object');
     expect(test.wrappedInstance.props.testList[2].value).toBe('car');
-
-    expect(testItem.wrappedInstance.props.index).toBe(0);
-    expect(testItem.wrappedInstance.props.testItem.selected).toBe(undefined);
-    expect(testItem.wrappedInstance.props.testItem.value).toBe('app');
   });
 
   it('should filterList', () => {
@@ -126,10 +127,6 @@ describe('react-redux-provide-list', () => {
     expect(test.wrappedInstance.props.testList[0].value).toBe('app');
     expect(test.wrappedInstance.props.testList[1]).toBe(undefined);
     expect(test.wrappedInstance.props.testList[2]).toBe(undefined);
-
-    expect(testItem.wrappedInstance.props.index).toBe(0);
-    expect(testItem.wrappedInstance.props.testItem.selected).toBe(undefined);
-    expect(testItem.wrappedInstance.props.testItem.value).toBe('app');
   });
 
   it('should unshiftItem', () => {
@@ -144,10 +141,6 @@ describe('react-redux-provide-list', () => {
     expect(test.wrappedInstance.props.testList[0].value).toBe('donut');
     expect(typeof test.wrappedInstance.props.testList[1]).toBe('object');
     expect(test.wrappedInstance.props.testList[1].value).toBe('app');
-
-    expect(testItem.wrappedInstance.props.index).toBe(0);
-    expect(testItem.wrappedInstance.props.testItem.selected).toBe(undefined);
-    expect(testItem.wrappedInstance.props.testItem.value).toBe('donut');
   });
 
   it('should shiftList', () => {
@@ -160,10 +153,6 @@ describe('react-redux-provide-list', () => {
     expect(test.wrappedInstance.props.testList[0].value).toBe('app');
     expect(test.wrappedInstance.props.testList[1]).toBe(undefined);
     expect(test.wrappedInstance.props.testList[2]).toBe(undefined);
-
-    expect(testItem.wrappedInstance.props.index).toBe(0);
-    expect(testItem.wrappedInstance.props.testItem.selected).toBe(undefined);
-    expect(testItem.wrappedInstance.props.testItem.value).toBe('app');
   });
 
   it('should pushItem', () => {
@@ -178,10 +167,6 @@ describe('react-redux-provide-list', () => {
     expect(test.wrappedInstance.props.testList[0].value).toBe('app');
     expect(typeof test.wrappedInstance.props.testList[1]).toBe('object');
     expect(test.wrappedInstance.props.testList[1].value).toBe('donut');
-
-    expect(testItem.wrappedInstance.props.index).toBe(0);
-    expect(testItem.wrappedInstance.props.testItem.selected).toBe(undefined);
-    expect(testItem.wrappedInstance.props.testItem.value).toBe('app');
   });
 
   it('should popList', () => {
@@ -194,10 +179,6 @@ describe('react-redux-provide-list', () => {
     expect(test.wrappedInstance.props.testList[0].value).toBe('app');
     expect(test.wrappedInstance.props.testList[1]).toBe(undefined);
     expect(test.wrappedInstance.props.testList[2]).toBe(undefined);
-
-    expect(testItem.wrappedInstance.props.index).toBe(0);
-    expect(testItem.wrappedInstance.props.testItem.selected).toBe(undefined);
-    expect(testItem.wrappedInstance.props.testItem.value).toBe('app');
   });
 
   it('should setItem', () => {
@@ -212,10 +193,6 @@ describe('react-redux-provide-list', () => {
     expect(test.wrappedInstance.props.testList[0].value).toBe('app');
     expect(typeof test.wrappedInstance.props.testList[1]).toBe('object');
     expect(test.wrappedInstance.props.testList[1].value).toBe('donut');
-
-    expect(testItem.wrappedInstance.props.index).toBe(0);
-    expect(testItem.wrappedInstance.props.testItem.selected).toBe(undefined);
-    expect(testItem.wrappedInstance.props.testItem.value).toBe('app');
   });
 
   it('should updateItem', () => {
@@ -226,17 +203,9 @@ describe('react-redux-provide-list', () => {
       }
     );
 
-    expect(test.wrappedInstance.props.testList instanceof Array).toBe(true);
-    expect(test.wrappedInstance.props.testList.length).toBe(2);
-    expect(test.wrappedInstance.props.testListLength).toBe(2);
-    expect(typeof test.wrappedInstance.props.testList[0]).toBe('object');
-    expect(test.wrappedInstance.props.testList[0].value).toBe('app');
-    expect(typeof test.wrappedInstance.props.testList[1]).toBe('object');
-    expect(test.wrappedInstance.props.testList[1].value).toBe('donut');
-
     expect(testItem.wrappedInstance.props.index).toBe(0);
     expect(testItem.wrappedInstance.props.testItem.selected).toBe(true);
-    expect(testItem.wrappedInstance.props.testItem.value).toBe('app');
+    expect(testItem.wrappedInstance.props.testItem.value).toBe('a');
     expect(testItem.wrappedInstance.props.testItem.updated).toBe(true);
   });
 
@@ -245,16 +214,9 @@ describe('react-redux-provide-list', () => {
       testItem.wrappedInstance.props.index
     );
 
-    expect(test.wrappedInstance.props.testList instanceof Array).toBe(true);
-    expect(test.wrappedInstance.props.testList.length).toBe(1);
-    expect(test.wrappedInstance.props.testListLength).toBe(1);
-    expect(typeof test.wrappedInstance.props.testList[0]).toBe('object');
-    expect(test.wrappedInstance.props.testList[0].value).toBe('donut');
-    expect(test.wrappedInstance.props.testList[1]).toBe(undefined);
-
     expect(testItem.wrappedInstance.props.index).toBe(0);
     expect(testItem.wrappedInstance.props.testItem.selected).toBe(undefined);
-    expect(testItem.wrappedInstance.props.testItem.value).toBe('donut');
+    expect(testItem.wrappedInstance.props.testItem.value).toBe('b');
     expect(testItem.wrappedInstance.props.testItem.updated).toBe(undefined);
   });
 
@@ -265,19 +227,16 @@ describe('react-redux-provide-list', () => {
     test.wrappedInstance.props.spliceTestList(1, 0, banana, carrot);
 
     expect(test.wrappedInstance.props.testList instanceof Array).toBe(true);
-    expect(test.wrappedInstance.props.testList.length).toBe(3);
-    expect(test.wrappedInstance.props.testListLength).toBe(3);
+    expect(test.wrappedInstance.props.testList.length).toBe(4);
+    expect(test.wrappedInstance.props.testListLength).toBe(4);
     expect(typeof test.wrappedInstance.props.testList[0]).toBe('object');
-    expect(test.wrappedInstance.props.testList[0].value).toBe('donut');
+    expect(test.wrappedInstance.props.testList[0].value).toBe('app');
     expect(typeof test.wrappedInstance.props.testList[1]).toBe('object');
     expect(test.wrappedInstance.props.testList[1].value).toBe('banana');
     expect(typeof test.wrappedInstance.props.testList[2]).toBe('object');
     expect(test.wrappedInstance.props.testList[2].value).toBe('carrot');
-
-    expect(testItem.wrappedInstance.props.index).toBe(0);
-    expect(testItem.wrappedInstance.props.testItem.selected).toBe(undefined);
-    expect(testItem.wrappedInstance.props.testItem.value).toBe('donut');
-    expect(testItem.wrappedInstance.props.testItem.updated).toBe(undefined);
+    expect(typeof test.wrappedInstance.props.testList[3]).toBe('object');
+    expect(test.wrappedInstance.props.testList[3].value).toBe('donut');
   });
 
   it('should sliceList', () => {
@@ -290,11 +249,6 @@ describe('react-redux-provide-list', () => {
     expect(test.wrappedInstance.props.testList[0].value).toBe('banana');
     expect(typeof test.wrappedInstance.props.testList[1]).toBe('object');
     expect(test.wrappedInstance.props.testList[1].value).toBe('carrot');
-
-    expect(testItem.wrappedInstance.props.index).toBe(0);
-    expect(testItem.wrappedInstance.props.testItem.selected).toBe(undefined);
-    expect(testItem.wrappedInstance.props.testItem.value).toBe('banana');
-    expect(testItem.wrappedInstance.props.testItem.updated).toBe(undefined);
   });
 
   it('should clearList', () => {
@@ -304,8 +258,5 @@ describe('react-redux-provide-list', () => {
     expect(test.wrappedInstance.props.testList.length).toBe(0);
     expect(test.wrappedInstance.props.testListLength).toBe(0);
     expect(test.wrappedInstance.props.testList[0]).toBe(undefined);
-
-    expect(testItem.wrappedInstance.props.index).toBe(0);
-    expect(testItem.wrappedInstance.props.testItem).toBe(undefined);
   });
 });
