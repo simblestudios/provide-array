@@ -26,26 +26,28 @@ The main export `provideList` takes 3 arguments:
 3. `indexName` - defaults to `'index'`
 
 
-## Example with default `actions` and `reducers`
+## Condensed example with default `actions` and `reducers`
 
 ```js
-import { assignProviders } from 'react-redux-provide';
+import { render } from 'react-dom';
 import provideList from 'react-redux-provide-list';
 import GoodStuff from './components/GoodStuff';
 
 const list = provideList();
 
-const initialState = {
-  list: [
-    { fruit: 'apple' },
-    { fruit: 'banana' }
-    { vegetable: 'carrot' }
-  ]
+const context = {
+  providers: { list },
+  providedState: {
+    list: [
+      { fruit: 'apple' },
+      { fruit: 'banana' }
+      { vegetable: 'carrot' }
+    ]
+  }
 };
 
-assignProviders(initialState, { list }, {
-  GoodStuff
-});
+// the GoodStuff component should be decorated with @provide
+render(<GoodStuff { ...context } />, document.getElementById('root'));
 ```
 
 An instance of `GoodStuff` will then be able to access the following `actions`:
@@ -73,26 +75,28 @@ And `reducers`:
 - `item` - if the component instance contains a prop key matching the `indexName` (e.g., `index`), the `item` at that key within the list will be provided
 
 
-## Example with predictable, custom `actions` and `reducers`
+## Condensed example with predictable, custom `actions` and `reducers`
 
 ```js
-import { assignProviders } from 'react-redux-provide';
+import { render } from 'react-dom';
 import provideList from 'react-redux-provide-list';
 import GoodStuff from './components/GoodStuff';
 
 const goodList = provideList('goodList', 'goodItem', 'goodIndex');
 
-const initialState = {
-  goodList: [
-    { fruit: 'apple' },
-    { fruit: 'banana' }
-    { vegetable: 'carrot' }
-  ]
+const context = {
+  providers: { goodList },
+  providedState: {
+    goodList: [
+      { fruit: 'apple' },
+      { fruit: 'banana' }
+      { vegetable: 'carrot' }
+    ]
+  }
 };
 
-assignProviders(initialState, { goodList }, {
-  GoodStuff
-});
+// the GoodStuff component should be decorated with @provide
+render(<GoodStuff { ...context } />, document.getElementById('root'));
 ```
 
 An instance of `GoodStuff` will then be able to access the same `actions` as above, but with slightly different keys:
