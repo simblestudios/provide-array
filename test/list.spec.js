@@ -25,7 +25,7 @@ const context = {
 const test = renderTest(Test, { ...context });
 const testItem = renderTest(TestItem, { ...context, index: 0 });
 
-describe('react-redux-provide-list', () => {
+describe('provide-array', () => {
   it('should have initialized list', () => {
     expect(test.wrappedInstance.props.testList instanceof Array).toBe(true);
     expect(typeof test.wrappedInstance.props.testList[0]).toBe('object');

@@ -35,7 +35,7 @@ module.exports = {
     ]
   },
   output: {
-    library: 'provideList',
+    library: 'provideArray',
     libraryTarget: 'umd'
   },
   resolve: {

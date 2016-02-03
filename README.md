@@ -1,9 +1,9 @@
 > *Feel free to submit any pull requests or create issues for anything you think might be useful!*
 
-# react-redux-provide-list
+# provide-array
 
-[![build status](https://img.shields.io/travis/loggur/react-redux-provide-list/master.svg?style=flat-square)](https://travis-ci.org/loggur/react-redux-provide-list) [![npm version](https://img.shields.io/npm/v/react-redux-provide-list.svg?style=flat-square)](https://www.npmjs.com/package/react-redux-provide-list)
-[![npm downloads](https://img.shields.io/npm/dm/react-redux-provide-list.svg?style=flat-square)](https://www.npmjs.com/package/react-redux-provide-list)
+[![build status](https://img.shields.io/travis/loggur/provide-array/master.svg?style=flat-square)](https://travis-ci.org/loggur/provide-array) [![npm version](https://img.shields.io/npm/v/provide-array.svg?style=flat-square)](https://www.npmjs.com/package/provide-array)
+[![npm downloads](https://img.shields.io/npm/dm/provide-array.svg?style=flat-square)](https://www.npmjs.com/package/provide-array)
 
 Provides `Array` instances to React components.
 
@@ -11,15 +11,15 @@ Provides `Array` instances to React components.
 ## Installation
 
 ```
-npm install react-redux-provide react-redux-provide-list --save
+npm install react-redux-provide provide-array --save
 ```
 
 
 ## Usage
 
-Use `react-redux-provide-list` to create providers with predictably named `actions` and `reducers` specific to manipulating arrays.  Create as many providers/instances as you want and share them across multiple components.
+Use `provide-array` to create providers with predictably named `actions` and `reducers` specific to manipulating arrays.  Create as many providers/instances as you want and share them across multiple components.
 
-The main export `provideList` takes 3 arguments:
+The main export `provideArray` takes 3 arguments:
 
 1. `listName` - defaults to `'list'`
 2. `itemName` - defaults to `'item'`
@@ -30,10 +30,10 @@ The main export `provideList` takes 3 arguments:
 
 ```js
 import { render } from 'react-dom';
-import provideList from 'react-redux-provide-list';
+import provideArray from 'provide-array';
 import GoodStuff from './components/GoodStuff';
 
-const list = provideList();
+const list = provideArray();
 
 const context = {
   providers: { list },
@@ -79,10 +79,10 @@ And `reducers`:
 
 ```js
 import { render } from 'react-dom';
-import provideList from 'react-redux-provide-list';
+import provideArray from 'provide-array';
 import GoodStuff from './components/GoodStuff';
 
-const goodList = provideList('goodList', 'goodItem', 'goodIndex');
+const goodList = provideArray('goodList', 'goodItem', 'goodIndex');
 
 const context = {
   providers: { goodList },

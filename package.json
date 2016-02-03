@@ -1,12 +1,12 @@
 {
-  "name": "react-redux-provide-list",
+  "name": "provide-array",
   "version": "0.4.3",
   "description": "Provides a handful of common actions and props specific to lists and items.",
   "main": "./lib/index.js",
   "scripts": {
     "build:lib": "babel src --out-dir lib",
-    "build:umd": "webpack src/index.js dist/react-redux-provide-list.js --config webpack.config.development.js",
-    "build:umd:min": "webpack src/index.js dist/react-redux-provide-list.min.js --config webpack.config.production.js",
+    "build:umd": "webpack src/index.js dist/provide-array.js --config webpack.config.development.js",
+    "build:umd:min": "webpack src/index.js dist/provide-array.min.js --config webpack.config.production.js",
     "build": "npm run build:lib && npm run build:umd && npm run build:umd:min",
     "clean": "rimraf lib dist coverage",
     "prepublish": "npm run clean && npm run build",
@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/loggur/react-redux-provide-list.git"
+    "url": "git+https://github.com/loggur/provide-array.git"
   },
   "keywords": [
     "react",
@@ -28,9 +28,9 @@
   "author": "timbur",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/loggur/react-redux-provide-list/issues"
+    "url": "https://github.com/loggur/provide-array/issues"
   },
-  "homepage": "https://github.com/loggur/react-redux-provide-list#readme",
+  "homepage": "https://github.com/loggur/provide-array#readme",
   "devDependencies": {
     "babel": "^5.8.21",
     "babel-core": "^5.8.22",

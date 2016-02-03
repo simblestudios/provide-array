@@ -1,5 +1,5 @@
-import provideList from '../../src/index';
+import provideArray from '../../src/index';
 
-const testList = provideList('testList', 'testItem');
+const testList = provideArray('testList', 'testItem');
 
 export default testList;

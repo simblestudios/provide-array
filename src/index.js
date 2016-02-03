@@ -1,4 +1,4 @@
-export default function provideList (
+export default function provideArray (
   listName = 'list', itemName = 'item', indexName = 'index'
 ) {
   const properListName = listName[0].toUpperCase()+listName.substring(1);
