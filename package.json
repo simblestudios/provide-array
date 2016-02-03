@@ -1,6 +1,6 @@
 {
   "name": "provide-array",
-  "version": "0.4.3",
+  "version": "0.5.0",
   "description": "Provides a handful of common actions and props specific to lists and items.",
   "main": "./lib/index.js",
   "scripts": {
