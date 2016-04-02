@@ -190,16 +190,21 @@ export default function provideArray (
     }
   };
 
-  function merge (stateProps, dispatchProps, parentProps) {
-    const list = stateProps[listName];
-    const index = parentProps[indexName];
-
-    return {
-      ...parentProps,
-      [`${listName}Length`]: list.length,
-      [itemName]: list[index]
-    };
-  }
+  const merge = {
+    [`${listName}Length`]: {
+      keys: [listName],
+      get(state) {
+        return state[listName].length;
+      }
+    },
+    
+    [itemName]: {
+      keys: [listName],
+      get(state, props) {
+        return state[listName][props[indexName]];
+      }
+    }
+  };
 
   return { ...constants, actions, reducers, merge };
 }

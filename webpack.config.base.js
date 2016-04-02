@@ -16,12 +16,6 @@ module.exports = {
       commonjs: 'redux',
       amd: 'redux'
     },
-    'react-redux': {
-      root: 'ReactRedux',
-      commonjs2: 'react-redux',
-      commonjs: 'react-redux',
-      amd: 'react-redux'
-    },
     'react-redux-provide': {
       root: 'ReactReduxProvide',
       commonjs2: 'react-redux-provide',

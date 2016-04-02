@@ -2,28 +2,32 @@ import expect from 'expect';
 import React, { PropTypes } from 'react';
 import { renderTest } from 'react-redux-provide-test-utils';
 import { Test, TestItem } from './components/index';
-import providers from './providers/index';
+import { testList } from './providers/index';
 
-const context = {
-  providers,
-  providedState: {
-    testList: [
-      {
-        selected: true,
-        value: 'a'
-      },
-      {
-        value: 'b'
-      },
-      {
-        value: 'c'
+const defaultProps = {
+  providers: {
+    testList: {
+      ...testList,
+      state: {
+        testList: [
+          {
+            selected: true,
+            value: 'a'
+          },
+          {
+            value: 'b'
+          },
+          {
+            value: 'c'
+          }
+        ]
       }
-    ]
+    }
   }
 };
 
-const test = renderTest(Test, { ...context });
-const testItem = renderTest(TestItem, { ...context, index: 0 });
+const test = renderTest(Test, { ...defaultProps });
+const testItem = renderTest(TestItem, { ...defaultProps, index: 0 });
 
 describe('provide-array', () => {
   it('should have initialized list', () => {

@@ -1,5 +1,5 @@
 import testList from './testList';
 
-export default {
+export {
   testList
 };

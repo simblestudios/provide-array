@@ -35,19 +35,22 @@ import GoodStuff from './components/GoodStuff';
 
 const list = provideArray();
 
-const context = {
-  providers: { list },
-  providedState: {
-    list: [
-      { fruit: 'apple' },
-      { fruit: 'banana' }
-      { vegetable: 'carrot' }
-    ]
+const defaultProps = {
+  providers: {
+    list: {
+      ...list,
+      state: {
+        list: [
+          { fruit: 'apple' },
+          { fruit: 'banana' }
+          { vegetable: 'carrot' }
+        ]
+      }
+    }
   }
 };
 
-// the GoodStuff component should be decorated with @provide
-render(<GoodStuff { ...context } />, document.getElementById('root'));
+render(<GoodStuff { ...defaultProps } />, document.getElementById('root'));
 ```
 
 An instance of `GoodStuff` will then be able to access the following `actions`:
@@ -84,19 +87,22 @@ import GoodStuff from './components/GoodStuff';
 
 const goodList = provideArray('goodList', 'goodItem', 'goodIndex');
 
-const context = {
-  providers: { goodList },
-  providedState: {
-    goodList: [
-      { fruit: 'apple' },
-      { fruit: 'banana' }
-      { vegetable: 'carrot' }
-    ]
+const defaultProps = {
+  providers: {
+    goodList: {
+      ...goodList: {
+      state: {
+        goodList: [
+          { fruit: 'apple' },
+          { fruit: 'banana' }
+          { vegetable: 'carrot' }
+        ]
+      }
+    }
   }
 };
 
-// the GoodStuff component should be decorated with @provide
-render(<GoodStuff { ...context } />, document.getElementById('root'));
+render(<GoodStuff { ...defaultProps } />, document.getElementById('root'));
 ```
 
 An instance of `GoodStuff` will then be able to access the same `actions` as above, but with slightly different keys:
