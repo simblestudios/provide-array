@@ -47,6 +47,7 @@
     "istanbul": "^0.3.17",
     "jsdom": "~5.4.3",
     "mocha": "^2.2.5",
+    "react": "^0.14.0 || ^15.0.0-rc.1",
     "react-redux-provide": "^6.0.0-rc.0",
     "react-redux-provide-test-utils": "^1.0.1",
     "rimraf": "^2.3.4",
