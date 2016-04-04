@@ -4,12 +4,16 @@
     "react",
     "stage-0"
   ],
-  "plugins": [
-    "transform-runtime",
-    ["react-transform", {
-      "transforms": [{
-        "transform": "react-redux-provide/lib/transform"
-      }]
-    }]
-  ]
+  "env": {
+    "test": {
+      "plugins": [
+        "transform-runtime",
+        ["react-transform", {
+          "transforms": [{
+            "transform": "react-redux-provide/lib/transform"
+          }]
+        }]
+      ]
+    }
+  }
 }

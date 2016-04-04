@@ -5,13 +5,25 @@
 [![build status](https://img.shields.io/travis/loggur/provide-array/master.svg?style=flat-square)](https://travis-ci.org/loggur/provide-array) [![npm version](https://img.shields.io/npm/v/provide-array.svg?style=flat-square)](https://www.npmjs.com/package/provide-array)
 [![npm downloads](https://img.shields.io/npm/dm/provide-array.svg?style=flat-square)](https://www.npmjs.com/package/provide-array)
 
-Provides `Array` instances to React components.
+Provider factory for `Array` instances to be shared across multiple React components.
+
+
+## Table of contents
+
+1.  [Installation](#installation)
+2.  [Usage](#usage)
+3.  [Condensed example (defaults)](#condensed-example-defaults)
+  - [Default actions](#default-actions)
+  - [Default reducers](#default-reducers)
+4.  [Condensed example (custom)](#condensed-example-custom)
+  - [Custom actions](#custom-actions)
+  - [Custom reducers](#custom-reducers)
 
 
 ## Installation
 
 ```
-npm install react-redux-provide provide-array --save
+npm install provide-array --save
 ```
 
 
@@ -21,12 +33,20 @@ Use `provide-array` to create providers with predictably named `actions` and `re
 
 The main export `provideArray` takes 3 arguments:
 
-1. `listName` - defaults to `'list'`
-2. `itemName` - defaults to `'item'`
-3. `indexName` - defaults to `'index'`
+### listName
+
+defaults to `'list'`
+
+### itemName
+
+defaults to `'item'`
+
+### indexName
+
+defaults to `'index'`
 
 
-## Condensed example with default `actions` and `reducers`
+## Condensed example (defaults)
 
 ```js
 import { render } from 'react-dom';
@@ -53,7 +73,9 @@ const defaultProps = {
 render(<GoodStuff { ...defaultProps } />, document.getElementById('root'));
 ```
 
-An instance of `GoodStuff` will then be able to access the following `actions`:
+Components can then use the following default `actions` and `reducers` via `propTypes`.
+
+### Default actions
 
 - `setList (Array list)` - sets the list
 - `sortList (Function sort)` - sorts the list
@@ -71,14 +93,14 @@ An instance of `GoodStuff` will then be able to access the following `actions`:
 - `updateItem (index, item)` - updates or sets the item at some `index`; if the existing item the update are both objects, it will merge the two as a new object
 - `deleteItem (index)` - deletes the item at some `index`
 
-And `reducers`:
+### Default reducers
 
 - `list` - the list instance, of course
 - `listLength` - the length of the list instance
 - `item` - if the component instance contains a prop key matching the `indexName` (e.g., `index`), the `item` at that key within the list will be provided
 
 
-## Condensed example with predictable, custom `actions` and `reducers`
+## Condensed example (custom)
 
 ```js
 import { render } from 'react-dom';
@@ -105,7 +127,9 @@ const defaultProps = {
 render(<GoodStuff { ...defaultProps } />, document.getElementById('root'));
 ```
 
-An instance of `GoodStuff` will then be able to access the same `actions` as above, but with slightly different keys:
+Components can then use the following custom `actions` and `reducers` via `propTypes`.
+
+### Custom actions
 
 - `setList` -> `setGoodList`
 - `sortList` -> `sortGoodList`
@@ -123,7 +147,7 @@ An instance of `GoodStuff` will then be able to access the same `actions` as abo
 - `updateItem` -> `updateGoodItem`
 - `deleteItem` -> `deleteGoodItem`
 
-And `reducers`:
+### Custom reducers
 
 - `list` -> `goodList`
 - `listLength` -> `goodListLength`
