@@ -51,7 +51,7 @@ defaults to `'index'`
 ```js
 import { render } from 'react-dom';
 import provideArray from 'provide-array';
-import GoodStuff from './components/GoodStuff';
+import { GoodStuff } from './components/index';
 
 const list = provideArray();
 
@@ -105,7 +105,7 @@ Components can then use the following default `actions` and `reducers` via `prop
 ```js
 import { render } from 'react-dom';
 import provideArray from 'provide-array';
-import GoodStuff from './components/GoodStuff';
+import { GoodStuff } from './components/index';
 
 const goodList = provideArray('goodList', 'goodItem', 'goodIndex');
 

@@ -1,7 +1,7 @@
 {
   "name": "provide-array",
   "version": "1.0.2",
-  "description": "Provides a handful of common actions and props specific to lists and items.",
+  "description": "Provider factory for `Array` instances to be shared across multiple React components.",
   "main": "./lib/index.js",
   "scripts": {
     "build:lib": "babel src --out-dir lib",
