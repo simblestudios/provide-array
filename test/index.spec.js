@@ -1,3 +1,4 @@
+import 'react-redux-provide/lib/install';
 import expect from 'expect';
 import React, { PropTypes } from 'react';
 import { renderTest } from 'react-redux-provide-test-utils';
